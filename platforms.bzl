@@ -27,8 +27,8 @@ platforms = [
     struct(
         os = "linux",
         cpu = "amd64",
-        urls = ["https://github.com/skaji/relocatable-perl/releases/download/5.36.0.1/perl-linux-amd64.tar.xz"],
-        sha256 = "3bdffa9d7a3f97c0207314637b260ba5115b1d0829f97e3e2e301191a4d4d076",
+        urls = ["https://github.com/malt3/relocatable-perl/releases/download/5.36.0.1-pre/perl-linux-amd64.tar.xz"],
+        sha256 = "bf7c2a0849ca1afc6615d0c8392b83533a4c7ca67e0c60b69754c98cb456a794",
         strip_prefix = "perl-linux-amd64",
         exec_compatible_with = [
             "@platforms//os:linux",
@@ -38,8 +38,8 @@ platforms = [
     struct(
         os = "linux",
         cpu = "arm64",
-        urls = ["https://github.com/skaji/relocatable-perl/releases/download/5.36.0.1/perl-linux-arm64.tar.xz"],
-        sha256 = "6fa4ece99e790ecbc2861f6ecb7b52694c01c2eeb215b4370f16a3b12d952117",
+        urls = ["https://github.com/malt3/relocatable-perl/releases/download/5.36.0.1-pre/perl-linux-arm64.tar.xz"],
+        sha256 = "29b461c4108b06641f631513300b5553598b3ad9bd26bdc517b2d6ea38fdff08",
         strip_prefix = "perl-linux-arm64",
         exec_compatible_with = [
             "@platforms//os:linux",
