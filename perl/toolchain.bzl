@@ -40,6 +40,10 @@ def _perl_toolchain_impl(ctx):
     xsubpp_cmd = _find_tool(ctx, "xsubpp")
     xs_headers = _find_xs_headers(ctx)
 
+    interpreter_cmd_path = interpreter_cmd.path
+    if ctx.target_platform_has_constraint(ctx.attr._windows_constraint[platform_common.ConstraintValueInfo]):
+        interpreter_cmd_path = interpreter_cmd.path.replace("/", "\\")
+
     return [
         platform_common.ToolchainInfo(
             name = ctx.label.name,
@@ -51,7 +55,7 @@ def _perl_toolchain_impl(ctx):
                 perlopt = ctx.attr.perlopt,
             ),
             make_variables = platform_common.TemplateVariableInfo({
-                "PERL": interpreter_cmd.path,
+                "PERL": interpreter_cmd_path,
             }),
         ),
     ]
@@ -67,12 +71,13 @@ perl_toolchain = rule(
             allow_files = True,
             cfg = "target",
         ),
+        "_windows_constraint": attr.label(default = "@platforms//os:windows"),
     },
     doc = "Gathers functions and file lists needed for a Perl toolchain",
 )
 
 def _current_perl_toolchain_impl(ctx):
-    toolchain = ctx.toolchains["@rules_perl//:toolchain_type"]
+    toolchain = ctx.toolchains["@rules_perl//perl:toolchain_type"]
 
     return [
         toolchain,
@@ -93,5 +98,5 @@ def _current_perl_toolchain_impl(ctx):
 # See https://github.com/bazelbuild/bazel/issues/14009#issuecomment-921960766
 current_perl_toolchain = rule(
     implementation = _current_perl_toolchain_impl,
-    toolchains = ["@rules_perl//:toolchain_type"],
+    toolchains = ["@rules_perl//perl:toolchain_type"],
 )
